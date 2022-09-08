@@ -1,7 +1,6 @@
 import clsx from 'clsx'
 import Image from 'next/future/image'
 import Link from 'next/link'
-
 import { Button } from '@/components/Button'
 import { Card } from '@/components/Card'
 import { Container } from '@/components/Container'
