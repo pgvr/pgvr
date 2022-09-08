@@ -1,0 +1,33 @@
+import { ArticleLayout } from '@/components/ArticleLayout'
+
+export const meta = {
+  author: 'Patrick Göler von Ravensburg',
+  date: '2020-04-10',
+  title: 'Quick Tip: Take advantage of the official Next.js examples',
+  description:
+    'Have you ever spent too much time trying to set something up with Next.js? Hopefully this quick tip can help you in the future.',
+}
+
+export default (props) => <ArticleLayout meta={meta} {...props} />
+
+Have you ever spent too much time trying to set something up with Next.js? Hopefully this quick tip can help you in the future.
+
+The Next.js repository contains one of the most extensive collections of examples I have seen.
+
+[Next.js Examples](https://github.com/vercel/next.js/tree/canary/examples)
+
+So if you are trying to integrate your favorite UI or data fetching library with Next.js there is a good chance they have an example for that already.
+
+This helped me a ton when I was trying to setup server side data fetching with Apollo GraphQL for the first time.
+
+All the examples seem well-maintained too, e.g. the Tailwind example was updated to use the new JIT compiler which is a rather new change.
+
+You can make use of this by copying the code you need or you can create a new Next.js project with an example as the template.
+
+```
+npx create-next-app --example with-tailwindcss with-tailwindcss-app
+# or
+yarn create next-app --example with-tailwindcss with-tailwindcss-app
+```
+
+Hope this helps :)

@@ -1,0 +1,239 @@
+import { ArticleLayout } from '@/components/ArticleLayout'
+import Image from 'next/future/image'
+import addBot from './add-bot.png'
+import copyClientId from './copy-client-id.png'
+import copyToken from './copy-token.png'
+import newApp from './new-app.png'
+import thumbnail from './thumbnail.png'
+
+export const meta = {
+  author: 'Patrick Göler von Ravensburg',
+  date: '2020-01-29',
+  title: 'Spice up your Discord game with a custom Music Bot',
+  description:
+    'Learn how to build your very own Discord Music Bot from scratch using Typescript and Discord.js.',
+}
+
+export default (props) => <ArticleLayout meta={meta} {...props} />
+
+Learn how to create a Discord Music Bot from scratch with Typescript to bring some tunes to your next gaming session. This bot will include a basic **play** and **stop** command which takes a Youtube link as an argument and then plays the audio of that Youtube video.
+
+[Here's the code for the project](https://github.com/patrickgoeler/jukebot-project) or the [more advanced, so called "Flötenbot"](https://github.com/patrickgoeler/floetenbot).
+
+Many free music bots exist out there but I found that the playback quality is lackluster which is totally understandable for the free version of a bot. So why not host your own bot I thought.
+
+There are also _so_ many ways to extend the bot to your liking. Add a queuing system or add an autoplay feature to fill the queue with songs similar to the last one played with the Spotify API to name a few. I have actually implemented these features in the "Flötenbot" project which is actively being used by me and my friends.
+
+### [Check out the video for this project too](https://www.youtube.com/watch?v=pZhUr1PBXEc)
+
+## Prerequisites
+
+You need to have [Nodejs](https://nodejs.org/en/) installed and a package manager of your choice, I'm using [Yarn](https://classic.yarnpkg.com/en/docs/install/#mac-stable). Finally a code editor of your choice and a [Discord](https://discord.com/) account is needed.
+
+## Setup
+
+Create a new folder somewhere you like and initialize it with yarn/npm.
+
+```bash
+mkdir jukebot
+cd jukebot
+yarn init -y
+```
+
+### Dependencies
+
+I tried to keep the amount of dependencies as low as possible here but some are still needed. Discord.js is used to connect to your Discord Bot, ytdl-core is used to stream Youtube videos and dotenv is used to load environment variables. Install these along with Typescript and some types and create a basic Typescript config.
+
+```bash
+yarn add -D typescript @types/node @types/ws
+yarn add @discordjs/opus discord-ytdl-core ytdl-core discord.js dotenv
+npx tsconfig.json
+```
+
+After that create a `src` directory and an `src/index.ts` file.
+
+Finally some scripts are required to run the code, so make sure you you have a script to compile and run the code. This could look like this:
+
+```json
+{
+    "name": "jukebot",
+    "version": "1.0.0",
+    "main": "index.js",
+    "license": "MIT",
+    "scripts": {
+        "build": "tsc",
+        "start": "node dist/index.js",
+        "dev": "yarn build && yarn start"
+    },
+    "devDependencies": {
+        "@types/node": "^14.14.22",
+        "@types/ws": "^7.4.0",
+        "typescript": "^4.1.3"
+    },
+    "dependencies": {
+        "@discordjs/opus": "^0.4.0",
+        "discord-ytdl-core": "^5.0.0",
+        "discord.js": "^12.5.1",
+        "dotenv": "^8.2.0",
+        "ytdl-core": "^4.4.5"
+    }
+}
+```
+
+### Discord Developer App
+
+Head over to the [Discord Developer Portal](https://discord.com/developers/applications) and make sure you are logged in. Head to the "Applications" tab and click on "New Application".
+
+<Image src={newApp} alt="" />
+
+Head to the "Bot" tab and create a new Bot.
+
+<Image src={addBot} alt="" />
+
+Copy the token and keep it **secret**!
+
+<Image src={copyToken} alt="" />
+
+## Creating the Discord Client
+
+Let's create a file to store our environment variables like this token from the bot.
+
+```tsx
+// src/config.ts
+import dotenv from "dotenv"
+dotenv.config()
+
+export const TOKEN = process.env.TOKEN || ""
+export const PREFIX = "_"
+```
+
+The "prefix" will be used to determine messages that are meant as commands for the bot. With the underscore as the prefix the play command would look like `_play youtube.com/...`.
+
+```tsx
+// src/index.ts
+import Discord from "discord.js"
+import { TOKEN } from "./config"
+
+const client = new Discord.Client()
+
+client.on("ready", () => {
+    console.log("The bot is online")
+})
+
+client.login(TOKEN)
+```
+
+This is how you would create a new Discord client and use the token to authenticate. You can try running this code now, in my case the command is `yarn dev`, and it should say "The bot is online".
+
+The final piece is the message handler, a function that runs whenever a message is sent on a server where the bot is present. So let's create a new file for that: `src/message.ts`.
+
+To begin with, this makes sure that the message is not sent by a bot and that it contains our defined prefix to make it a valid command for the bot.
+
+Next, the prefix is stripped from the message and the message is split by spaces. The first entry is of course the command (play, stop, etc.) so that is taken out of the args into a separate variable.
+
+Then a simple if/else checks which command is being invoked.
+
+If the command is "play" then the first entry in args must be the url. There is currently no validation in place to make sure there actually is a url, but this would be a good idea down the road. Before doing anything else, this checks whether the user invoking the command is actually in a voice channel. If so, this creates a stream of the supplied Youtube video with the [discord-ytdl-core](https://www.npmjs.com/package/discord-ytdl-core) library and then the bot joins the same voice channel as the user. Finally the stream is piped into the voice connection to play the audio.
+
+```tsx
+// src/message.ts
+import { Message } from "discord.js"
+import { PREFIX } from "./config"
+import ytdl from "discord-ytdl-core"
+
+export async function onMessage(message: Message) {
+    try {
+        if (!message.content.startsWith(PREFIX) || message.author.bot) return
+
+        console.log(`Received message from ${message.author.username} saying: ${message.content}`)
+
+        const args = message.content.slice(PREFIX.length).trim().split(/ +/)
+        const command = args.shift()?.toLowerCase()
+
+        if (command === "play") {
+            // play url
+            const voiceChannel = message.member?.voice.channel
+            if (!voiceChannel) {
+                await message.channel.send("You must be in a voice channel")
+                return
+            }
+
+            const url = args[0]
+            const stream = ytdl(url)
+
+            const connection = await voiceChannel.join()
+
+            connection
+                .play(stream, { type: "opus" })
+                .on("error", (error) => console.log(error))
+                .on("close", () => {
+                    stream.destroy()
+                    connection.disconnect()
+                })
+        } else if (command === "stop") {
+            // stop
+            const voiceChannel = message.member?.voice.channel
+            if (!voiceChannel) {
+                await message.channel.send("You must be in a voice channel")
+                return
+            }
+
+            const connection = await voiceChannel.join()
+            connection.disconnect()
+        } else {
+            await message.channel.send("Unknown command, try _play or _stop")
+        }
+    } catch (error) {
+        console.log(error)
+    }
+}
+```
+
+The `.on("close")` handler makes sure the bot leaves the voice channel once the playback is done. This is similar to the "stop" command. The "stop" command checks for the voice channel again and tries to connect to that. Since the bot should already be in the voice channel, this is not doing anything but providing a reference to the connection. This reference can then be used to disconnect from that channel.
+
+The final piece in the puzzle is to connect this message handler to the discord client.
+
+```tsx
+// src/index.ts
+import Discord from "discord.js"
+import { TOKEN } from "./config"
+import { onMessage } from "./message"
+
+const client = new Discord.Client()
+
+client.on("ready", () => {
+    console.log("The bot is online")
+})
+
+client.on("message", onMessage)
+
+client.login(TOKEN)
+```
+
+The bot is now ready to rock 🤘 ... but the bot isn't on the Discord server yet.
+
+### Invite the Bot
+
+Back in the Discord Developer Portal you can find the client ID.
+
+<Image src={copyClientId} alt="" />
+
+Copy that and replace "ID" in this link: "https://discord.com/oauth2/authorize?client_id=ID&scope=bot". Then you can visit this link and you should have the option to invite your bot to a Discord server of your choice. Keep in mind that you need the permission to invite bots to that server though.
+
+### Queue the disco music 🎧
+
+When the bot is started now with (in my case) `yarn dev` the bot comes to life and it should be visible as online in your server.
+
+Now find a song on Youtube, copy the link and send a message `_play LINK` in one of the Discord text channels and enjoy the tunes! 🎉
+
+_Pro tip: You can right click the bot and adjust the volume in case it's too loud/quiet_.
+
+I ran the bot locally for a bit but then decided to deploy it to Digital Ocean for 24/7 uptime and better performance. You can get 100$ starting credit on [Digital Ocean with my referral link](https://m.do.co/c/94447edbb6e6). For the 5$/month droplet you can host the bot (and much more by the way) for 20 month.
+
+Leave a comment if you would like to see how to deploy something like this bot to Digital Ocean.
+
+**Thanks for making it this far** ❤️
+
+_As I'm just getting started I'd be eternally grateful for shares, likes and subscribes on_ [Youtube](https://www.youtube.com/channel/UCx8bwDAyeR5VfXPFk0j70-w).
+
+👋

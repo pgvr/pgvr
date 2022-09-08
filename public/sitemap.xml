@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+        <loc>https://pgvr.dev/about</loc>
+    </url>
+
+    <url>
+        <loc>https://pgvr.dev</loc>
+    </url>
+
+    <url>
+        <loc>https://pgvr.dev/blog</loc>
+    </url>
+
+    <url>
+        <loc>https://pgvr.dev/blog/discord-bot</loc>
+    </url>
+
+    <url>
+        <loc>https://pgvr.dev/blog/linktree-clone</loc>
+    </url>
+
+    <url>
+        <loc>https://pgvr.dev/blog/quick-tip-nextjs</loc>
+    </url>
+
+    <url>
+        <loc>https://pgvr.dev/blog/raycast-extension</loc>
+    </url>
+
+    <url>
+        <loc>https://pgvr.dev/blog/webdev-setup</loc>
+    </url>
+</urlset>
