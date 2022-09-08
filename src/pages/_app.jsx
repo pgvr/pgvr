@@ -2,10 +2,11 @@ import { useEffect, useRef } from 'react'
 
 import { Footer } from '@/components/Footer'
 import { Header } from '@/components/Header'
-
+import SEO from '../../next-seo.config'
+import { DefaultSeo } from 'next-seo'
 import '@/styles/tailwind.css'
 import 'focus-visible'
-
+import splitbee from '@splitbee/web'
 function usePrevious(value) {
   let ref = useRef()
 
@@ -18,7 +19,14 @@ function usePrevious(value) {
 
 export default function App({ Component, pageProps, router }) {
   let previousPathname = usePrevious(router.pathname)
-
+  useEffect(() => {
+    if (process.env.NODE_ENV === 'production') {
+      splitbee.init({
+        apiUrl: '/sb-api',
+        scriptUrl: '/sb.js',
+      })
+    }
+  }, [])
   return (
     <>
       <div className="fixed inset-0 flex justify-center sm:px-8">
@@ -27,6 +35,7 @@ export default function App({ Component, pageProps, router }) {
         </div>
       </div>
       <div className="relative">
+        <DefaultSeo {...SEO} />
         <Header />
         <main>
           <Component previousPathname={previousPathname} {...pageProps} />

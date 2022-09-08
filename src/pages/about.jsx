@@ -1,14 +1,14 @@
-import Image from 'next/future/image'
-import Head from 'next/head'
-import Link from 'next/link'
 import clsx from 'clsx'
+import { NextSeo } from 'next-seo'
+import Image from 'next/future/image'
+import Link from 'next/link'
 
 import { Container } from '@/components/Container'
 import {
-  TwitterIcon,
-  InstagramIcon,
   GitHubIcon,
+  InstagramIcon,
   LinkedInIcon,
+  TwitterIcon,
 } from '@/components/SocialIcons'
 import portraitImage from '@/images/portrait.jpg'
 
@@ -40,13 +40,17 @@ function MailIcon(props) {
 export default function About() {
   return (
     <>
-      <Head>
-        <title>About - Patrick Göler von Ravensburg</title>
-        <meta
-          name="description"
-          content="I’m Patrick Göler von Ravensburg. I live in Munich, where I help to build the decarbonisation platform of the future."
-        />
-      </Head>
+      <NextSeo
+        title="About - Patrick Göler von Ravensburg"
+        description="I’m Patrick Göler von Ravensburg. I live in Munich, where I help to build the decarbonisation platform of the future."
+        canonical="https://pgvr.dev/about"
+        openGraph={{
+          url: 'https://pgvr.dev/about',
+          title: 'About – Patrick Göler von Ravensburg',
+          description:
+            'I’m Patrick Göler von Ravensburg. I live in Munich, where I help to build the decarbonisation platform of the future.',
+        }}
+      />
       <Container className="mt-16 sm:mt-32">
         <div className="grid grid-cols-1 gap-y-16 lg:grid-cols-2 lg:grid-rows-[auto_1fr] lg:gap-y-12">
           <div className="lg:pl-20">
@@ -61,58 +65,76 @@ export default function About() {
           </div>
           <div className="lg:order-first lg:row-span-2">
             <h1 className="text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl">
-              I’m Spencer Sharp. I live in New York City, where I design the
-              future.
+              I’m Patrick, I live in Munich, where I help to build the
+              decarbonisation platform of the future.
             </h1>
             <div className="mt-6 space-y-7 text-base text-zinc-600 dark:text-zinc-400">
               <p>
-                I’ve loved making things for as long as I can remember, and
-                wrote my first program when I was 6 years old, just two weeks
-                after my mom brought home the brand new Macintosh LC 550 that I
-                taught myself to type on.
+                I&apos;d love to tell a great story about how I was 5 years old
+                and already tinkering with computers. The reality is that I had
+                no clue about programming until after high school. As soon as I
+                got into university and my first job, I became really passionate
+                about it and pursued it further.
               </p>
               <p>
-                The only thing I loved more than computers as a kid was space.
-                When I was 8, I climbed the 40-foot oak tree at the back of our
-                yard while wearing my older sister’s motorcycle helmet, counted
-                down from three, and jumped — hoping the tree was tall enough
-                that with just a bit of momentum I’d be able to get to orbit.
+                The thing that facinates me about software is how you can create
+                value for youself and others, practically out of thin air.
+                It&apos;s a bit like magic, given a laptop and an internet
+                connection, anyone can learn about software development and
+                start their own business.
               </p>
               <p>
-                I spent the next few summers indoors working on a rocket design,
-                while I recovered from the multiple surgeries it took to fix my
-                badly broken legs. It took nine iterations, but when I was 15 I
-                sent my dad’s Blackberry into orbit and was able to transmit a
-                photo back down to our family computer from space.
+                Nowadays, schools are starting to incorporate basic computer
+                science into their curriculum. I&apos;m excited to see what kind
+                of opportunities this will open up in the future and what the
+                next company in the FAANG club will be.
               </p>
               <p>
-                Today, I’m the founder of Planetaria, where we’re working on
-                civilian space suits and manned shuttle kits you can assemble at
-                home so that the next generation of kids really <em>can</em>{' '}
-                make it to orbit — from the comfort of their own backyards.
+                Today, I’m an engineer at{' '}
+                <a
+                  className="font-bold"
+                  href="https://tanso.io"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  @Tanso
+                </a>
+                , where we build software to automate processes in carbon
+                accounting and lay the analytical foundation for effective
+                emission reduction in producing companies. In my freetime I like
+                to play disc golf, build small-scale hydroponics systems, keep
+                up on the latest space news and work on side projects.
               </p>
             </div>
           </div>
           <div className="lg:pl-20">
             <ul role="list">
-              <SocialLink href="#" icon={TwitterIcon}>
+              <SocialLink
+                href="https://twitter.com/patrick_gvr"
+                icon={TwitterIcon}
+              >
                 Follow on Twitter
               </SocialLink>
-              <SocialLink href="#" icon={InstagramIcon} className="mt-4">
-                Follow on Instagram
-              </SocialLink>
-              <SocialLink href="#" icon={GitHubIcon} className="mt-4">
+              <SocialLink
+                href="https://github.com/pgvr"
+                icon={GitHubIcon}
+                className="mt-4"
+              >
                 Follow on GitHub
               </SocialLink>
-              <SocialLink href="#" icon={LinkedInIcon} className="mt-4">
+              <SocialLink
+                href="https://www.linkedin.com/in/pgvr"
+                icon={LinkedInIcon}
+                className="mt-4"
+              >
                 Follow on LinkedIn
               </SocialLink>
               <SocialLink
-                href="mailto:spencer@planetaria.tech"
+                href="mailto:mail@pgvr.dev"
                 icon={MailIcon}
                 className="mt-8 border-t border-zinc-100 pt-8 dark:border-zinc-700/40"
               >
-                spencer@planetaria.tech
+                mail@pgvr.dev
               </SocialLink>
             </ul>
           </div>

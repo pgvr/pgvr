@@ -1,9 +1,11 @@
 import Head from 'next/head'
+
 import { useRouter } from 'next/router'
 
 import { Container } from '@/components/Container'
 import { formatDate } from '@/lib/formatDate'
 import { Prose } from '@/components/Prose'
+import BlogSeo from '@/components/BlogSeo'
 
 function ArrowLeftIcon(props) {
   return (
@@ -32,10 +34,13 @@ export function ArticleLayout({
 
   return (
     <>
-      <Head>
-        <title>{`${meta.title} - Patrick Göler von Ravensburg`}</title>
-        <meta name="description" content={meta.description} />
-      </Head>
+      <BlogSeo
+        url={`https://pgvr.dev/articles/${meta.slug}`}
+        image={meta.thumbnail}
+        publishedAt={meta.date}
+        summary={meta.description}
+        title={meta.title}
+      />
       <Container className="mt-16 lg:mt-32">
         <div className="xl:relative">
           <div className="mx-auto max-w-2xl">

@@ -1,49 +1,42 @@
 import Image from 'next/future/image'
-import Head from 'next/head'
-
+import { NextSeo } from 'next-seo'
 import { Card } from '@/components/Card'
 import { SimpleLayout } from '@/components/SimpleLayout'
-import logoAnimaginary from '@/images/logos/animaginary.svg'
-import logoCosmos from '@/images/logos/cosmos.svg'
-import logoHelioStream from '@/images/logos/helio-stream.svg'
-import logoOpenShuttle from '@/images/logos/open-shuttle.svg'
-import logoPlanetaria from '@/images/logos/planetaria.svg'
+import kickbuddyLogo from '@/images/logos/kickbuddy.svg'
+import hyzerbaseLogo from '@/images/logos/hyzerbase.png'
+import githubLogo from '@/images/logos/github.svg'
+import fluteLogo from '@/images/logos/flute.svg'
 
 const projects = [
   {
-    name: 'Planetaria',
+    name: 'hyzerbase',
     description:
-      'Creating technology to empower civilians to explore space on their own terms.',
-    link: { href: 'http://planetaria.tech', label: 'planetaria.tech' },
-    logo: logoPlanetaria,
+      'Experience disc golf at home. Follow top players and pro tournaments.',
+    link: { href: 'https://hyzerbase.com', label: 'hyzerbase.com' },
+    logo: hyzerbaseLogo,
   },
   {
-    name: 'Animaginary',
-    description:
-      'High performance web animation library, hand-written in optimized WASM.',
-    link: { href: '#', label: 'github.com' },
-    logo: logoAnimaginary,
+    name: 'Kickbuddy',
+    description: 'Provides quality of live improvements for playing Kickbase.',
+    link: { href: 'https://kickbuddy.de', label: 'kickbuddy.de' },
+    logo: kickbuddyLogo,
   },
   {
-    name: 'HelioStream',
+    name: 'Flötenbot',
     description:
-      'Real-time video streaming library, optimized for interstellar transmission.',
-    link: { href: '#', label: 'github.com' },
-    logo: logoHelioStream,
+      'Self-hosted Discord Bot that can play music from Spotify and Youtube. By self hosting the bitrate is higher than the one of other public bots which was a pain point for us.',
+    link: {
+      href: 'https://github.com/patrickgoeler/floetenbot',
+      label: 'Github',
+    },
+    logo: fluteLogo,
   },
   {
-    name: 'cosmOS',
+    name: 'Music Mash',
     description:
-      'The operating system that powers our Planetaria space shuttles.',
-    link: { href: '#', label: 'github.com' },
-    logo: logoCosmos,
-  },
-  {
-    name: 'OpenShuttle',
-    description:
-      'The schematics for the first rocket I designed that successfully made it to orbit.',
-    link: { href: '#', label: 'github.com' },
-    logo: logoOpenShuttle,
+      'I wanted to create a Spotify playlist, blending together the preferences from multiple Spotify accounts. It worked well, but Spotify introduced that features themselves.',
+    link: { href: 'https://github.com/pgvr/music-mash', label: 'Github' },
+    logo: githubLogo,
   },
 ]
 
@@ -61,16 +54,20 @@ function LinkIcon(props) {
 export default function Projects() {
   return (
     <>
-      <Head>
-        <title>Projects - Patrick Göler von Ravensburg</title>
-        <meta
-          name="description"
-          content="Things I’ve made trying to put my dent in the universe."
-        />
-      </Head>
+      <NextSeo
+        title="Projects - Patrick Göler von Ravensburg"
+        description="Side projects"
+        canonical="https://pgvr.dev/projects"
+        openGraph={{
+          url: 'https://pgvr.dev/projects',
+          title: 'Projects – Patrick Göler von Ravensburg',
+          description:
+            'When tinkering with new technologies I often create some kind of project around it',
+        }}
+      />
       <SimpleLayout
-        title="Things I’ve made trying to put my dent in the universe."
-        intro="I’ve worked on tons of little projects over the years but these are the ones that I’m most proud of. Many of them are open-source, so if you see something that piques your interest, check out the code and contribute if you have ideas for how it can be improved."
+        title="Side projects"
+        intro="I created tons of small projects over the years, as this is a great way to explore new technologies and improve your programming chops. Some were more serious, some were not. If you see anything that is not open-source but you find interesting, let me know!"
       >
         <ul
           role="list"
@@ -87,7 +84,9 @@ export default function Projects() {
                 />
               </div>
               <h2 className="mt-6 text-base font-semibold text-zinc-800 dark:text-zinc-100">
-                <Card.Link href={project.link.href}>{project.name}</Card.Link>
+                <Card.Link target="_blank" href={project.link.href}>
+                  {project.name}
+                </Card.Link>
               </h2>
               <Card.Description>{project.description}</Card.Description>
               <p className="relative z-10 mt-6 flex text-sm font-medium text-zinc-400 transition group-hover:text-teal-500 dark:text-zinc-200">

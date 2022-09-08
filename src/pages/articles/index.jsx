@@ -1,9 +1,9 @@
-import Head from 'next/head'
+import { NextSeo } from 'next-seo'
 
 import { Card } from '@/components/Card'
 import { SimpleLayout } from '@/components/SimpleLayout'
-import { getAllArticles } from '@/lib/getAllArticles'
 import { formatDate } from '@/lib/formatDate'
+import { getAllArticles } from '@/lib/getAllArticles'
 
 function Article({ article }) {
   return (
@@ -35,18 +35,25 @@ function Article({ article }) {
 }
 
 export default function ArticlesIndex({ articles }) {
+  const url = 'https://pgvr.dev/articles'
+  const description = "Let's talk about web development trends, tips and tricks"
+  const title = 'Articles – Patrick Göler von Ravensburg'
+
   return (
     <>
-      <Head>
-        <title>Articles - Patrick Göler von Ravensburg</title>
-        <meta
-          name="description"
-          content="All of my long-form thoughts on programming, leadership, product design, and more, collected in chronological order."
-        />
-      </Head>
+      <NextSeo
+        title={title}
+        description={description}
+        canonical={url}
+        openGraph={{
+          url,
+          title,
+          description,
+        }}
+      />
       <SimpleLayout
-        title="Writing on software design, company building, and the aerospace industry."
-        intro="All of my long-form thoughts on programming, leadership, product design, and more, collected in chronological order."
+        title="Articles about web development, trends, new technologies and more."
+        intro="I write neither often nor well. Having said that, some things are worth sharing."
       >
         <div className="md:border-l md:border-zinc-100 md:pl-6 md:dark:border-zinc-700/40">
           <div className="flex max-w-3xl flex-col space-y-16">

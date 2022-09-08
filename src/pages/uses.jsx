@@ -1,4 +1,4 @@
-import Head from 'next/head'
+import { NextSeo } from 'next-seo'
 
 import { Card } from '@/components/Card'
 import { Section } from '@/components/Section'
@@ -28,88 +28,84 @@ function Tool({ title, href, children }) {
 export default function Uses() {
   return (
     <>
-      <Head>
-        <title>Uses - Patrick Göler von Ravensburg</title>
-        <meta
-          name="description"
-          content="Software I use, gadgets I love, and other things I recommend."
-        />
-      </Head>
+      <NextSeo
+        title="Uses - Patrick Göler von Ravensburg"
+        description="Software I use, hardware I use, and overall cool stuff I use."
+        canonical="https://pgvr.dev/uses"
+        openGraph={{
+          url: 'https://pgvr.dev/uses',
+          title: 'Uses – Patrick Göler von Ravensburg',
+          description:
+            'Software I use, hardware I use, and overall cool stuff I use.',
+        }}
+      />
       <SimpleLayout
-        title="Software I use, gadgets I love, and other things I recommend."
-        intro="I get asked a lot about the things I use to build software, stay productive, or buy to fool myself into thinking I’m being productive when I’m really just procrastinating. Here’s a big list of all of my favorite stuff."
+        title="Software I use, hardware I use, and overall cool stuff I use."
+        intro="Over the years I found what tools and gadgets work for me when it comes to productivity and quality of life. Let me know if you discovered something you like here."
       >
         <div className="space-y-20">
           <ToolsSection title="Workstation">
-            <Tool title="16” MacBook Pro, M1 Max, 64GB RAM (2021)">
-              I was using an Intel-based 16” MacBook Pro prior to this and the
-              difference is night and day. I’ve never heard the fans turn on a
-              single time, even under the incredibly heavy loads I put it
-              through with our various launch simulations.
+            <Tool title="14” MacBook Pro, M1 Pro, 16GB RAM (2021)">
+              This thing is incredible and it&apos;s not even the highest spec
+              version. Anything with the M1 chip is almost a must have I feel
+              when it comes to software engineering. No fan noise, decent
+              thermals and crazy performance.
             </Tool>
-            <Tool title="Apple Pro Display XDR (Standard Glass)">
-              The only display on the market if you want something HiDPI and
-              bigger than 27”. When you’re working at planetary scale, every
-              pixel you can get counts.
+            <Tool title="Some kind of 27” 4K Dell">
+              That&apos;s just what we have at the office and it works quite
+              well.
             </Tool>
-            <Tool title="IBM Model M SSK Industrial Keyboard">
-              They don’t make keyboards the way they used to. I buy these any
-              time I see them go up for sale and keep them in storage in case I
-              need parts or need to retire my main.
+            <Tool title="Apple Magic Keyboard">
+              I just love the default magic keyboard. I have the small version
+              without the numpad and the trackpad right next to it.
             </Tool>
             <Tool title="Apple Magic Trackpad">
               Something about all the gestures makes me feel like a wizard with
               special powers. I really like feeling like a wizard with special
               powers.
             </Tool>
-            <Tool title="Herman Miller Aeron Chair">
-              If I’m going to slouch in the worst ergonomic position imaginable
-              all day, I might as well do it in an expensive chair.
+            <Tool title="Minimaldesksetups Desk Pad">
+              If I&apos;m going to sit at my desk for most of the day, might as
+              well make it comfortable right?
             </Tool>
           </ToolsSection>
           <ToolsSection title="Development tools">
-            <Tool title="Sublime Text 4">
-              I don’t care if it’s missing all of the fancy IDE features
-              everyone else relies on, Sublime Text is still the best text
-              editor ever made.
-            </Tool>
+            <Tool title="VS Code">No, I don&apos;t use Vim. :)</Tool>
             <Tool title="iTerm2">
-              I’m honestly not even sure what features I get with this that
-              aren’t just part of the macOS Terminal but it’s what I use.
+              This was part of some setup guide I followed years ago and have
+              been using it ever since.
             </Tool>
             <Tool title="TablePlus">
               Great software for working with databases. Has saved me from
               building about a thousand admin interfaces for my various projects
-              over the years.
+              over the years. Prisma Studio is great when working locally, but
+              for everything more complex TablePlus is very nice.
             </Tool>
           </ToolsSection>
           <ToolsSection title="Design">
             <Tool title="Figma">
-              We started using Figma as just a design tool but now it’s become
-              our virtual whiteboard for the entire company. Never would have
-              expected the collaboration features to be the real hook.
+              Figma is great and I use it for everything from high- to low
+              fidelity, logos, brainstorming during meetings and much more.
+            </Tool>
+            <Tool title="Tailwind UI">
+              Tailwind UI is a paid component and template library for
+              Tailwindcss. I have bought this on the same day it initially it
+              released and it it&apos;s worth every cent.
             </Tool>
           </ToolsSection>
           <ToolsSection title="Productivity">
-            <Tool title="Alfred">
-              It’s not the newest kid on the block but it’s still the fastest.
-              The Sublime Text of the application launcher world.
+            <Tool title="Raycast">
+              As a developer myself, it&apos;s a delight to see and use great
+              software. Raycast definitely falls within that category. It&apos;s
+              a snappy, extensive and feature rich spotlight replacement with a
+              very developer friendly API so that you can easily create your own
+              extensions.
             </Tool>
-            <Tool title="Reflect">
-              Using a daily notes system instead of trying to keep things
-              organized by topics has been super powerful for me. And with
-              Reflect, it’s still easy for me to keep all of that stuff
-              discoverable by topic even though all of my writing happens in the
-              daily note.
-            </Tool>
-            <Tool title="SavvyCal">
-              Great tool for scheduling meetings while protecting my calendar
-              and making sure I still have lots of time for deep work during the
-              week.
-            </Tool>
-            <Tool title="Focus">
-              Simple tool for blocking distracting websites when I need to just
-              do the work and get some momentum going.
+            <Tool title="Linear">
+              Linear is magical. The Linear team has managed to make an issue
+              tracking tool that you actually enjoy using. The attention to
+              detail, polish and great design are some of the many things that
+              stand out when using it.
             </Tool>
           </ToolsSection>
         </div>

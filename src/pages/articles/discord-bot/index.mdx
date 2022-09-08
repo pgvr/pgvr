@@ -4,7 +4,6 @@ import addBot from './add-bot.png'
 import copyClientId from './copy-client-id.png'
 import copyToken from './copy-token.png'
 import newApp from './new-app.png'
-import thumbnail from './thumbnail.png'
 
 export const meta = {
   author: 'Patrick Göler von Ravensburg',
@@ -12,6 +11,8 @@ export const meta = {
   title: 'Spice up your Discord game with a custom Music Bot',
   description:
     'Learn how to build your very own Discord Music Bot from scratch using Typescript and Discord.js.',
+  slug: 'discord-bot',
+  thumbnail: 'discord-thumbnail.png',
 }
 
 export default (props) => <ArticleLayout meta={meta} {...props} />
@@ -56,27 +57,27 @@ Finally some scripts are required to run the code, so make sure you you have a s
 
 ```json
 {
-    "name": "jukebot",
-    "version": "1.0.0",
-    "main": "index.js",
-    "license": "MIT",
-    "scripts": {
-        "build": "tsc",
-        "start": "node dist/index.js",
-        "dev": "yarn build && yarn start"
-    },
-    "devDependencies": {
-        "@types/node": "^14.14.22",
-        "@types/ws": "^7.4.0",
-        "typescript": "^4.1.3"
-    },
-    "dependencies": {
-        "@discordjs/opus": "^0.4.0",
-        "discord-ytdl-core": "^5.0.0",
-        "discord.js": "^12.5.1",
-        "dotenv": "^8.2.0",
-        "ytdl-core": "^4.4.5"
-    }
+  "name": "jukebot",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "yarn build && yarn start"
+  },
+  "devDependencies": {
+    "@types/node": "^14.14.22",
+    "@types/ws": "^7.4.0",
+    "typescript": "^4.1.3"
+  },
+  "dependencies": {
+    "@discordjs/opus": "^0.4.0",
+    "discord-ytdl-core": "^5.0.0",
+    "discord.js": "^12.5.1",
+    "dotenv": "^8.2.0",
+    "ytdl-core": "^4.4.5"
+  }
 }
 ```
 
@@ -100,24 +101,24 @@ Let's create a file to store our environment variables like this token from the 
 
 ```tsx
 // src/config.ts
-import dotenv from "dotenv"
+import dotenv from 'dotenv'
 dotenv.config()
 
-export const TOKEN = process.env.TOKEN || ""
-export const PREFIX = "_"
+export const TOKEN = process.env.TOKEN || ''
+export const PREFIX = '_'
 ```
 
 The "prefix" will be used to determine messages that are meant as commands for the bot. With the underscore as the prefix the play command would look like `_play youtube.com/...`.
 
 ```tsx
 // src/index.ts
-import Discord from "discord.js"
-import { TOKEN } from "./config"
+import Discord from 'discord.js'
+import { TOKEN } from './config'
 
 const client = new Discord.Client()
 
-client.on("ready", () => {
-    console.log("The bot is online")
+client.on('ready', () => {
+  console.log('The bot is online')
 })
 
 client.login(TOKEN)
@@ -137,55 +138,57 @@ If the command is "play" then the first entry in args must be the url. There is 
 
 ```tsx
 // src/message.ts
-import { Message } from "discord.js"
-import { PREFIX } from "./config"
-import ytdl from "discord-ytdl-core"
+import { Message } from 'discord.js'
+import { PREFIX } from './config'
+import ytdl from 'discord-ytdl-core'
 
 export async function onMessage(message: Message) {
-    try {
-        if (!message.content.startsWith(PREFIX) || message.author.bot) return
+  try {
+    if (!message.content.startsWith(PREFIX) || message.author.bot) return
 
-        console.log(`Received message from ${message.author.username} saying: ${message.content}`)
+    console.log(
+      `Received message from ${message.author.username} saying: ${message.content}`
+    )
 
-        const args = message.content.slice(PREFIX.length).trim().split(/ +/)
-        const command = args.shift()?.toLowerCase()
+    const args = message.content.slice(PREFIX.length).trim().split(/ +/)
+    const command = args.shift()?.toLowerCase()
 
-        if (command === "play") {
-            // play url
-            const voiceChannel = message.member?.voice.channel
-            if (!voiceChannel) {
-                await message.channel.send("You must be in a voice channel")
-                return
-            }
+    if (command === 'play') {
+      // play url
+      const voiceChannel = message.member?.voice.channel
+      if (!voiceChannel) {
+        await message.channel.send('You must be in a voice channel')
+        return
+      }
 
-            const url = args[0]
-            const stream = ytdl(url)
+      const url = args[0]
+      const stream = ytdl(url)
 
-            const connection = await voiceChannel.join()
+      const connection = await voiceChannel.join()
 
-            connection
-                .play(stream, { type: "opus" })
-                .on("error", (error) => console.log(error))
-                .on("close", () => {
-                    stream.destroy()
-                    connection.disconnect()
-                })
-        } else if (command === "stop") {
-            // stop
-            const voiceChannel = message.member?.voice.channel
-            if (!voiceChannel) {
-                await message.channel.send("You must be in a voice channel")
-                return
-            }
+      connection
+        .play(stream, { type: 'opus' })
+        .on('error', (error) => console.log(error))
+        .on('close', () => {
+          stream.destroy()
+          connection.disconnect()
+        })
+    } else if (command === 'stop') {
+      // stop
+      const voiceChannel = message.member?.voice.channel
+      if (!voiceChannel) {
+        await message.channel.send('You must be in a voice channel')
+        return
+      }
 
-            const connection = await voiceChannel.join()
-            connection.disconnect()
-        } else {
-            await message.channel.send("Unknown command, try _play or _stop")
-        }
-    } catch (error) {
-        console.log(error)
+      const connection = await voiceChannel.join()
+      connection.disconnect()
+    } else {
+      await message.channel.send('Unknown command, try _play or _stop')
     }
+  } catch (error) {
+    console.log(error)
+  }
 }
 ```
 
@@ -195,17 +198,17 @@ The final piece in the puzzle is to connect this message handler to the discord 
 
 ```tsx
 // src/index.ts
-import Discord from "discord.js"
-import { TOKEN } from "./config"
-import { onMessage } from "./message"
+import Discord from 'discord.js'
+import { TOKEN } from './config'
+import { onMessage } from './message'
 
 const client = new Discord.Client()
 
-client.on("ready", () => {
-    console.log("The bot is online")
+client.on('ready', () => {
+  console.log('The bot is online')
 })
 
-client.on("message", onMessage)
+client.on('message', onMessage)
 
 client.login(TOKEN)
 ```

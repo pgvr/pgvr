@@ -2,6 +2,17 @@ import nextMDX from '@next/mdx'
 import remarkGfm from 'remark-gfm'
 import rehypePrism from '@mapbox/rehype-prism'
 
+const rewrites = async () => [
+  {
+    destination: 'https://cdn.splitbee.io/sb.js',
+    source: '/sb.js',
+  },
+  {
+    destination: 'https://hive.splitbee.io/:slug',
+    source: '/sb-api/:slug',
+  },
+]
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   pageExtensions: ['jsx', 'mdx'],
@@ -13,6 +24,7 @@ const nextConfig = {
       allowFutureImage: true,
     },
   },
+  rewrites,
 }
 
 const withMDX = nextMDX({

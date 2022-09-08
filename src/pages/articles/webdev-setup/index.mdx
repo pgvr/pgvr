@@ -1,14 +1,16 @@
 import { ArticleLayout } from '@/components/ArticleLayout'
 import Image from 'next/future/image'
 import terminal from './terminal.png'
-import thumbnail from './thumbnail.png'
 
 export const meta = {
   author: 'Patrick Göler von Ravensburg',
   date: '2020-01-13',
-  title: 'How to get started with Web Development on Windows with the WSL in 2021',
+  title:
+    'How to get started with Web Development on Windows with the WSL in 2021',
   description:
-    "In this guide you will learn how to install what I consider to be close to the perfect web development setup for Windows. This includes using the Windows Subsystem for Linux, Windows Terminal, the Node Version Manager as well as some tips and tricks along the way.",
+    'In this guide you will learn how to install what I consider to be close to the perfect web development setup for Windows. This includes using the Windows Subsystem for Linux, Windows Terminal, the Node Version Manager as well as some tips and tricks along the way.',
+  slug: 'webdev-setup',
+  thumbnail: 'webdev-thumbnail.png',
 }
 
 export default (props) => <ArticleLayout meta={meta} {...props} />
@@ -49,11 +51,11 @@ You now have successfully installed Linux on Windows. 🎉
 
 If you are running a Windows Insider build (OS build20262 or higher) you should be able to open CMD with admin privileges and type `wsl.exe --install`. Since you are most likely running a normal Windows build you will have to install this **manually** like me. I'm looking forward for this functionality to land in normal Windows builds. This new installation command will:
 
--   enable the WSL Windows feature
--   Download and install the latest Linux kernel
--   Set the WSL version 2 as the default
--   Downloads a Linux distribution (default is Ubuntu) and installs it
-    -   To install another distribution try `wsl --list --online` to see available distributions and use this command to specify the distribution `wsl --install -d <Distribution Name>`
+- enable the WSL Windows feature
+- Download and install the latest Linux kernel
+- Set the WSL version 2 as the default
+- Downloads a Linux distribution (default is Ubuntu) and installs it
+  - To install another distribution try `wsl --list --online` to see available distributions and use this command to specify the distribution `wsl --install -d <Distribution Name>`
 
 You now have successfully installed Linux on Windows. 🎉
 
@@ -75,10 +77,10 @@ To set Ubuntu as the default when opening Windows Terminal open the Settings (CT
 
 ```json
 {
-    "guid": "{07b52e3e-de2c-5db4-bd2d-ba144ed6c273}",
-    "hidden": false,
-    "name": "Ubuntu-20.04",
-    "source": "Windows.Terminal.Wsl"
+  "guid": "{07b52e3e-de2c-5db4-bd2d-ba144ed6c273}",
+  "hidden": false,
+  "name": "Ubuntu-20.04",
+  "source": "Windows.Terminal.Wsl"
 }
 ```
 

@@ -9,26 +9,34 @@
     </url>
 
     <url>
-        <loc>https://pgvr.dev/blog</loc>
+        <loc>https://pgvr.dev/uses</loc>
     </url>
 
     <url>
-        <loc>https://pgvr.dev/blog/discord-bot</loc>
+        <loc>https://pgvr.dev/projects</loc>
     </url>
 
     <url>
-        <loc>https://pgvr.dev/blog/linktree-clone</loc>
+        <loc>https://pgvr.dev/articles</loc>
     </url>
 
     <url>
-        <loc>https://pgvr.dev/blog/quick-tip-nextjs</loc>
+        <loc>https://pgvr.dev/articles/discord-bot</loc>
     </url>
 
     <url>
-        <loc>https://pgvr.dev/blog/raycast-extension</loc>
+        <loc>https://pgvr.dev/articles/linktree-clone</loc>
     </url>
 
     <url>
-        <loc>https://pgvr.dev/blog/webdev-setup</loc>
+        <loc>https://pgvr.dev/articles/quick-tip-nextjs</loc>
+    </url>
+
+    <url>
+        <loc>https://pgvr.dev/articles/raycast-extension</loc>
+    </url>
+
+    <url>
+        <loc>https://pgvr.dev/articles/webdev-setup</loc>
     </url>
 </urlset>

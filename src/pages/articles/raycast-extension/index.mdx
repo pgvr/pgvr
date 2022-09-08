@@ -3,7 +3,6 @@ import Image from 'next/future/image'
 import createExtension from './create_extension.png'
 import helloWorld from './hello_world.png'
 import terminal from './terminal.png'
-import thumbnail from './thumbnail.png'
 
 export const meta = {
   author: 'Patrick Göler von Ravensburg',
@@ -11,6 +10,8 @@ export const meta = {
   title: 'How to build a simple Raycast extension',
   description:
     "Learn how to build your first Raycast extension. It's easier than you think!",
+  slug: 'raycast-extension',
+  thumbnail: 'raycast-thumbnail.png',
 }
 
 export default (props) => <ArticleLayout meta={meta} {...props} />
@@ -45,12 +46,12 @@ Replace the contents of `src/index.tsx` with this:
 
 ```tsx
 // src/index.tsx
-import { Action, ActionPanel, Icon, List } from "@raycast/api"
+import { Action, ActionPanel, Icon, List } from '@raycast/api'
 
 const items = [
   {
-    title: "Button",
-    url: "https://chakra-ui.com/docs/form/button",
+    title: 'Button',
+    url: 'https://chakra-ui.com/docs/form/button',
   },
 ]
 

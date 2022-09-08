@@ -3,15 +3,17 @@ import Image from 'next/future/image'
 import buttonPermissions from './button-permissions.jpg'
 import finalResult from './final-result.png'
 import linktreeOfficial from './linktree-official.png'
-import thumbnail from './thumbnail.png'
 import userCreation from './user-creation.jpg'
 
 export const meta = {
   author: 'Patrick Göler von Ravensburg',
   date: '2020-01-21',
-  title: 'Build a Linktree clone in under 1 hour with Strapi, Next.js and GraphQL',
+  title:
+    'Build a Linktree clone in under 1 hour with Strapi, Next.js and GraphQL',
   description:
     'Building a basic Linktree clone seems rather simple which is perfect for showcasing a bunch of technologies and how they work together. Strapi, GraphQL and Next.js are the main building blocks for this project while Tailwind and GraphQL Codegen help with efficiency and developer experience.',
+  slug: 'linktree-clone',
+  thumbnail: 'linktree-thumbnail.png',
 }
 
 export default (props) => <ArticleLayout meta={meta} {...props} />
@@ -64,10 +66,10 @@ Now let's create an application user since we only have an admin user at the mom
 
 Now that we have a user let's create the _buttons_ collection. Go to Content Types Builder and create a new collection type called **Button**. A basic button needs these fields:
 
--   text: text
--   url: text
--   visible: boolean
--   user: Many-to-one relation with user from user-permissions (not admin-user)
+- text: text
+- url: text
+- visible: boolean
+- user: Many-to-one relation with user from user-permissions (not admin-user)
 
 You can also set text and url as required in the _advanced field settings_ and provide a default value for visible. Save the collection and create a button which belongs to your user so we have some data to fetch. Don't forget to also publish the button after saving. Before fetching data the permissions for the buttons and users need to be adjusted. For development purposes we can allow all functions for these collections. For a real world scenario these would have to be double checked! So go to Settings → Roles → Public and allow everything for buttons and users (users are at the bottom).
 
@@ -77,13 +79,13 @@ The backend should now be ready for data to be fetched. The GraphQL playground c
 
 ```graphql
 query Buttons {
-    buttons {
-        text
-        url
-        user {
-            username
-        }
+  buttons {
+    text
+    url
+    user {
+      username
     }
+  }
 }
 ```
 
@@ -169,17 +171,17 @@ Now the entire app needs be wrapped with the _ApolloProvider_ using the client w
 
 ```tsx
 // pages/_app.tsx
-import { ApolloProvider } from "@apollo/client";
-import { AppProps } from "next/app";
-import { useApollo } from "../lib/apolloClient";
+import { ApolloProvider } from '@apollo/client'
+import { AppProps } from 'next/app'
+import { useApollo } from '../lib/apolloClient'
 
 export default function App({ Component, pageProps }: AppProps) {
-  const apolloClient = useApollo(pageProps);
+  const apolloClient = useApollo(pageProps)
   return (
     <ApolloProvider client={apolloClient}>
       <Component {...pageProps}></Component>
     </ApolloProvider>
-  );
+  )
 }
 ```
 
@@ -240,11 +242,11 @@ In this case we can simply fetch all the users and only allow their usernames. A
 ```tsx
 // pages/[username].tsx
 export async function getStaticPaths() {
-  const apolloClient = initializeApollo();
+  const apolloClient = initializeApollo()
 
   const { data } = await apolloClient.query<UsersQuery>({
     query: UsersDocument,
-  });
+  })
 
   return {
     paths: data?.users?.map((user) => ({
@@ -253,7 +255,7 @@ export async function getStaticPaths() {
       },
     })),
     fallback: false,
-  };
+  }
 }
 ```
 
@@ -264,17 +266,17 @@ Now the button data needs to be fetched.
 ```tsx
 // pages/[username].tsx
 export async function getStaticProps({ params }: GetStaticPropsContext) {
-  const apolloClient = initializeApollo();
+  const apolloClient = initializeApollo()
 
   const { data } = await apolloClient.query<ButtonsQuery>({
     query: ButtonsDocument,
     variables: { username: params?.username },
-  });
+  })
 
   return {
     props: { data, username: params?.username },
     revalidate: 1,
-  };
+  }
 }
 ```
 
@@ -300,19 +302,19 @@ With this data now being efficiently fetched on the server and available in the 
 ```tsx
 // pages/[username].tsx
 type Props = {
-  data: ButtonsQuery;
-  username: string;
-};
+  data: ButtonsQuery
+  username: string
+}
 
 export default function Username({ data, username }: Props) {
   return (
-    <div className="min-h-screen max-w-2xl mx-auto flex flex-col items-center py-10">
+    <div className="mx-auto flex min-h-screen max-w-2xl flex-col items-center py-10">
       <img
-        className="rounded-full h-24 w-24 mb-4"
+        className="mb-4 h-24 w-24 rounded-full"
         src="data:image/png;base64,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"
       />
-      <h1 className="font-bold text-lg mb-10">@{username}</h1>
-      <div className="space-y-4 w-full">
+      <h1 className="mb-10 text-lg font-bold">@{username}</h1>
+      <div className="w-full space-y-4">
         {data.buttons?.map((btn) => (
           <Button key={btn?.text} text={btn?.text!} url={btn?.url!} />
         ))}
@@ -376,7 +378,7 @@ export default function Username({ data, username }: Props) {
         </g>
       </svg>
     </div>
-  );
+  )
 }
 ```
 
@@ -384,22 +386,22 @@ For the process and my thoughts behind building the UI I think [a video is suite
 
 ```tsx
 // components/Button.tsx
-import NextLink from "next/link";
+import NextLink from 'next/link'
 
 type Props = {
-  text: string;
-  url: string;
-};
+  text: string
+  url: string
+}
 
 export default function Button({ text, url }: Props) {
-  const link = url.includes("http") ? url : `https://${url}`;
+  const link = url.includes('http') ? url : `https://${url}`
   return (
     <NextLink href={link}>
-      <button className="bg-green-300 text-white border-green-300 border-2 py-4 px-14 w-full hover:bg-white hover:text-green-300 transition-all duration-100">
+      <button className="w-full border-2 border-green-300 bg-green-300 py-4 px-14 text-white transition-all duration-100 hover:bg-white hover:text-green-300">
         {text}
       </button>
     </NextLink>
-  );
+  )
 }
 ```
 

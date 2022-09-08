@@ -1,29 +1,30 @@
-import Image from 'next/future/image'
-import Head from 'next/head'
-import Link from 'next/link'
 import clsx from 'clsx'
+import Image from 'next/future/image'
+import Link from 'next/link'
 
 import { Button } from '@/components/Button'
 import { Card } from '@/components/Card'
 import { Container } from '@/components/Container'
 import {
-  TwitterIcon,
-  InstagramIcon,
   GitHubIcon,
+  InstagramIcon,
   LinkedInIcon,
+  TwitterIcon,
 } from '@/components/SocialIcons'
+import logoSap from '@/images/logos/sap.svg'
+import aioneersLogo from '@/images/logos/aioneers.jpeg'
+import logoYasoon from '@/images/logos/yasoon.jpeg'
+import logoSovanta from '@/images/logos/sovanta.jpeg'
+import logoApliconus from '@/images/logos/apliconus.png'
+import tansoLogo from '@/images/logos/tanso.png'
 import image1 from '@/images/photos/image-1.jpg'
 import image2 from '@/images/photos/image-2.jpg'
 import image3 from '@/images/photos/image-3.jpg'
 import image4 from '@/images/photos/image-4.jpg'
 import image5 from '@/images/photos/image-5.jpg'
-import logoAirbnb from '@/images/logos/airbnb.svg'
-import logoFacebook from '@/images/logos/facebook.svg'
-import tansoLogo from '@/images/logos/tanso.png'
-import logoStarbucks from '@/images/logos/starbucks.svg'
+import { formatDate } from '@/lib/formatDate'
 import { generateRssFeed } from '@/lib/generateRssFeed'
 import { getAllArticles } from '@/lib/getAllArticles'
-import { formatDate } from '@/lib/formatDate'
 
 function MailIcon(props) {
   return (
@@ -109,8 +110,36 @@ function SocialLink({ icon: Icon, ...props }) {
 
 function Newsletter() {
   return (
+    // <form
+    //   action="/thank-you"
+    //   className="rounded-2xl border border-zinc-100 p-6 dark:border-zinc-700/40"
+    // >
+    //   <h2 className="flex text-sm font-semibold text-zinc-900 dark:text-zinc-100">
+    //     <MailIcon className="h-6 w-6 flex-none" />
+    //     <span className="ml-3">Stay up to date</span>
+    //   </h2>
+    // <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
+    //   Get notified when I publish something new, and unsubscribe at any time.
+    // </p>
+    //   <div className="mt-6 flex">
+    //     <input
+    //       type="email"
+    //       placeholder="Email address"
+    //       aria-label="Email address"
+    //       required
+    //       className="min-w-0 flex-auto appearance-none rounded-md border border-zinc-900/10 bg-white px-3 py-[calc(theme(spacing.2)-1px)] shadow-md shadow-zinc-800/5 transition placeholder:text-zinc-400 focus:border-teal-500 focus:outline-none focus:ring-4 focus:ring-teal-500/10 dark:border-zinc-700 dark:bg-zinc-700/[0.15] dark:text-zinc-200 dark:placeholder:text-zinc-500 dark:focus:border-teal-400 dark:focus:ring-teal-400/10 sm:text-sm"
+    //     />
+    //     <Button type="submit" className="ml-4 flex-none">
+    //       Join
+    //     </Button>
+    //   </div>
+    // </form>
     <form
-      action="/thank-you"
+      action="https://www.getrevue.co/profile/pgvr/add_subscriber"
+      method="post"
+      id="revue-form"
+      name="revue-form"
+      target="_blank"
       className="rounded-2xl border border-zinc-100 p-6 dark:border-zinc-700/40"
     >
       <h2 className="flex text-sm font-semibold text-zinc-900 dark:text-zinc-100">
@@ -122,16 +151,51 @@ function Newsletter() {
       </p>
       <div className="mt-6 flex">
         <input
-          type="email"
           placeholder="Email address"
           aria-label="Email address"
+          type="email"
+          name="member[email]"
+          id="member_email"
           required
-          className="min-w-0 flex-auto appearance-none rounded-md border border-zinc-900/10 bg-white px-3 py-[calc(theme(spacing.2)-1px)] shadow-md shadow-zinc-800/5 placeholder:text-zinc-400 focus:border-teal-500 focus:outline-none focus:ring-4 focus:ring-teal-500/10 dark:border-zinc-700 dark:bg-zinc-700/[0.15] dark:text-zinc-200 dark:placeholder:text-zinc-500 dark:focus:border-teal-400 dark:focus:ring-teal-400/10 sm:text-sm"
+          className="min-w-0 flex-auto appearance-none rounded-md border border-zinc-900/10 bg-white px-3 py-[calc(theme(spacing.2)-1px)] shadow-md shadow-zinc-800/5 transition placeholder:text-zinc-400 focus:border-teal-500 focus:outline-none focus:ring-4 focus:ring-teal-500/10 dark:border-zinc-700 dark:bg-zinc-700/[0.15] dark:text-zinc-200 dark:placeholder:text-zinc-500 dark:focus:border-teal-400 dark:focus:ring-teal-400/10 sm:text-sm"
         />
-        <Button type="submit" className="ml-4 flex-none">
+        <Button
+          name="member[subscribe]"
+          type="submit"
+          value="Subscribe"
+          id="member_submit"
+          className="ml-4 flex-none"
+        >
           Join
         </Button>
+        {/* <div className="revue-form-actions">
+          <input
+            type="submit"
+            value="Subscribe"
+            name="member[subscribe]"
+            id="member_submit"
+          />
+        </div> */}
       </div>
+      {/* <div className="mt-4 text-xs text-zinc-600 dark:text-zinc-400">
+        By subscribing, you agree with Revue’s{' '}
+        <a
+          target="_blank"
+          rel="noreferrer"
+          href="https://www.getrevue.co/terms"
+        >
+          Terms of Service
+        </a>{' '}
+        and{' '}
+        <a
+          target="_blank"
+          rel="noreferrer"
+          href="https://www.getrevue.co/privacy"
+        >
+          Privacy Policy
+        </a>
+        .
+      </div> */}
     </form>
   )
 }
@@ -151,37 +215,37 @@ function Resume() {
     {
       company: 'SAP',
       title: 'Master thesis',
-      logo: logoAirbnb,
+      logo: logoSap,
       start: 'April 2021',
       end: 'November 2021',
     },
     {
       company: 'Aioneers',
       title: 'Software Engineer (student)',
-      logo: logoFacebook,
+      logo: aioneersLogo,
       start: 'April 2020',
       end: 'March 2021',
     },
     {
       company: 'Yasoon',
       title: 'Software Engineer (student)',
-      logo: logoStarbucks,
+      logo: logoYasoon,
       start: 'February 2020',
       end: 'March 2020',
     },
     {
       company: 'Sovanta',
       title: 'Software Engineer (student)',
-      logo: logoStarbucks,
-      start: 'February 2020',
-      end: 'March 2020',
+      logo: logoSovanta,
+      start: 'September 2018',
+      end: 'June 2019',
     },
     {
       company: 'APLICONUS',
       title: 'Software Engineer (student)',
-      logo: logoStarbucks,
-      start: 'February 2020',
-      end: 'March 2020',
+      logo: logoApliconus,
+      start: 'April 2016',
+      end: 'August 2018',
     },
   ]
 
@@ -195,7 +259,12 @@ function Resume() {
         {resume.map((role, roleIndex) => (
           <li key={roleIndex} className="flex gap-4">
             <div className="relative mt-1 flex h-10 w-10 flex-none items-center justify-center rounded-full shadow-md shadow-zinc-800/5 ring-1 ring-zinc-900/5 dark:border dark:border-zinc-700/50 dark:bg-zinc-800 dark:ring-0">
-              <Image src={role.logo} alt="" className="h-7 w-7 rounded-full" unoptimized />
+              <Image
+                src={role.logo}
+                alt=""
+                className="h-7 w-7 rounded-full"
+                unoptimized
+              />
             </div>
             <dl className="flex flex-auto flex-wrap gap-x-2">
               <dt className="sr-only">Company</dt>
@@ -225,7 +294,7 @@ function Resume() {
           </li>
         ))}
       </ol>
-      <Button href="#" variant="secondary" className="group mt-6 w-full">
+      <Button href="/cv.pdf" variant="secondary" className="group mt-6 w-full">
         Download CV
         <ArrowDownIcon className="h-4 w-4 stroke-zinc-400 transition group-active:stroke-zinc-600 dark:group-hover:stroke-zinc-50 dark:group-active:stroke-zinc-50" />
       </Button>
@@ -263,46 +332,47 @@ function Photos() {
 export default function Home({ articles }) {
   return (
     <>
-      <Head>
-        <title>
-          Patrick Göler von Ravensburg - Software engineer, disc golfer, and space enthusiast
-        </title>
-        <meta
-          name="description"
-          content="I’m Patrick, a software engineer based in Munich, Germany. I’m the founder and CEO of Planetaria, where we develop technologies that empower regular people to explore space on their own terms."
-        />
-      </Head>
       <Container className="mt-9">
         <div className="max-w-2xl">
           <h1 className="text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl">
             Software engineer, disc golfer, and space enthusiast.
           </h1>
           <p className="mt-6 text-base text-zinc-600 dark:text-zinc-400">
-            I’m Patrick, a software designer and entrepreneur based in New York
-            City. I’m the founder and CEO of Planetaria, where we develop
-            technologies that empower regular people to explore space on their
-            own terms.
+            My name is Patrick and I&apos;m a web developer with a masters
+            degree in Business Informatics from the University of Mannheim. Now
+            I work{' '}
+            <a
+              className="font-bold"
+              href="https://tanso.io"
+              target="_blank"
+              rel="noreferrer"
+            >
+              @Tanso
+            </a>{' '}
+            where we automate processes in carbon accounting and lay the
+            analytical foundation for effective emission reduction in producing
+            companies.
           </p>
           <div className="mt-6 flex gap-6">
             <SocialLink
-              href="https://twitter.com"
+              href="https://twitter.com/patrick_gvr"
               aria-label="Follow on Twitter"
               icon={TwitterIcon}
             />
             <SocialLink
-              href="https://instagram.com"
-              aria-label="Follow on Instagram"
-              icon={InstagramIcon}
-            />
-            <SocialLink
-              href="https://github.com"
+              href="https://github.com/pgvr"
               aria-label="Follow on GitHub"
               icon={GitHubIcon}
             />
             <SocialLink
-              href="https://linkedin.com"
+              href="https://www.linkedin.com/in/pgvr/"
               aria-label="Follow on LinkedIn"
               icon={LinkedInIcon}
+            />
+            <SocialLink
+              href="mailto:mail@pgvr.dev"
+              aria-label="Send me a message"
+              icon={MailIcon}
             />
           </div>
         </div>
