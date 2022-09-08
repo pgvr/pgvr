@@ -42,13 +42,13 @@ export default function About() {
     <>
       <NextSeo
         title="About - Patrick Göler von Ravensburg"
-        description="I’m Patrick Göler von Ravensburg. I live in Munich, where I help to build the decarbonisation platform of the future."
+        description="I’m Patrick Göler von Ravensburg. I live in Munich, where I help to build the carbon accounting platform of the future."
         canonical="https://pgvr.dev/about"
         openGraph={{
           url: 'https://pgvr.dev/about',
           title: 'About – Patrick Göler von Ravensburg',
           description:
-            'I’m Patrick Göler von Ravensburg. I live in Munich, where I help to build the decarbonisation platform of the future.',
+            'I’m Patrick Göler von Ravensburg. I live in Munich, where I help to build the carbon accounting platform of the future.',
         }}
       />
       <Container className="mt-16 sm:mt-32">
@@ -65,8 +65,8 @@ export default function About() {
           </div>
           <div className="lg:order-first lg:row-span-2">
             <h1 className="text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl">
-              I’m Patrick, I live in Munich, where I help to build the
-              decarbonisation platform of the future.
+              I’m Patrick, I live in Munich, where I help to build the carbon
+              accounting platform of the future.
             </h1>
             <div className="mt-6 space-y-7 text-base text-zinc-600 dark:text-zinc-400">
               <p>
