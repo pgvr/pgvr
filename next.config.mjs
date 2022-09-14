@@ -13,6 +13,16 @@ const rewrites = async () => [
   },
 ]
 
+const redirects = async () => {
+  return [
+    {
+      source: '/blog/:path*',
+      destination: '/articles/:path*',
+      permanent: true,
+    },
+  ]
+}
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   pageExtensions: ['jsx', 'mdx'],
@@ -25,6 +35,7 @@ const nextConfig = {
     },
   },
   rewrites,
+  redirects,
 }
 
 const withMDX = nextMDX({
