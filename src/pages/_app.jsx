@@ -24,6 +24,7 @@ export default function App({ Component, pageProps, router }) {
       splitbee.init({
         apiUrl: '/sb-api',
         scriptUrl: '/sb.js',
+        disableCookie: true,
       })
     }
   }, [])

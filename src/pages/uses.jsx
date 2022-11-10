@@ -57,7 +57,9 @@ export default function Uses() {
             </Tool>
             <Tool title="Apple Magic Keyboard">
               I just love the default magic keyboard. I have the small version
-              without the numpad and the trackpad right next to it.
+              without the numpad and the trackpad right next to it. I just
+              ordered a Nuphy Halo 65 though and maybe that will replace my dear
+              Magic Keyboard, let&apos;s see.
             </Tool>
             <Tool title="Apple Magic Trackpad">
               Something about all the gestures makes me feel like a wizard with
@@ -70,10 +72,19 @@ export default function Uses() {
             </Tool>
           </ToolsSection>
           <ToolsSection title="Development tools">
-            <Tool title="VS Code">No, I don&apos;t use Vim. :)</Tool>
+            <Tool title="VS Code">
+              I love VS Code and I recently started to use/learn Vim keybindings
+              in VS Code. Vim nerds will probably roll their eyes but I think
+              it&apos;s a great way to get started.
+            </Tool>
             <Tool title="iTerm2">
               This was part of some setup guide I followed years ago and have
               been using it ever since.
+            </Tool>
+            <Tool title="Dracula">
+              I use the Dracula Pro theme for pretty much everything and
+              that&apos;s what I like about it. You get themes for iTerm, Slack,
+              Chrome, VS Code, Vim so that everything looks nice together.
             </Tool>
             <Tool title="TablePlus">
               Great software for working with databases. Has saved me from
