@@ -12,8 +12,8 @@ const rewrites = async () => [
     source: '/sb-api/:slug',
   },
   {
-    destination: 'https://taito-analytics.vercel.app/*',
-    source: '/taito/*',
+    destination: 'https://taito-analytics.vercel.app/:slug',
+    source: '/taito/:slug',
   },
 ]
 
