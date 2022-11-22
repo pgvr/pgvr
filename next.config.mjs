@@ -11,6 +11,10 @@ const rewrites = async () => [
     destination: 'https://hive.splitbee.io/:slug',
     source: '/sb-api/:slug',
   },
+  {
+    destination: 'https://taito-analytics.vercel.app/*',
+    source: '/taito/*',
+  },
 ]
 
 const redirects = async () => {
