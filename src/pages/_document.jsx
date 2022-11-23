@@ -50,7 +50,11 @@ export default function Document() {
           type="application/feed+json"
           href={`${process.env.NEXT_PUBLIC_SITE_URL}/rss/feed.json`}
         />
-        <script data-api="/taito/api/arc" src="/taito/taito.js" defer></script>
+        <script
+          data-api="/frogalytics/api"
+          src="/frogalytics/frogalytics.js"
+          defer
+        ></script>
       </Head>
       <body className="flex h-full flex-col bg-zinc-50 dark:bg-black">
         <Main />
