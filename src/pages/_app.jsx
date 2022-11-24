@@ -7,6 +7,8 @@ import { DefaultSeo } from 'next-seo'
 import '@/styles/tailwind.css'
 import 'focus-visible'
 import splitbee from '@splitbee/web'
+import frogalytics from '@frogalytics/web'
+
 function usePrevious(value) {
   let ref = useRef()
 
@@ -21,6 +23,10 @@ export default function App({ Component, pageProps, router }) {
   let previousPathname = usePrevious(router.pathname)
   useEffect(() => {
     if (process.env.NODE_ENV === 'production') {
+      frogalytics.init({
+        apiUrl: '/frogalytics/api',
+        scriptUrl: '/frogalytics/frogalytics.js',
+      })
       splitbee.init({
         apiUrl: '/sb-api',
         scriptUrl: '/sb.js',
