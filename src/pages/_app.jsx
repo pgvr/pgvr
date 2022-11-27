@@ -19,15 +19,14 @@ function usePrevious(value) {
   return ref.current
 }
 
-frogalytics.init({
-  apiUrl: '/frogalytics/api',
-  scriptUrl: '/frogalytics/frogalytics.js',
-})
-
 export default function App({ Component, pageProps, router }) {
   let previousPathname = usePrevious(router.pathname)
   useEffect(() => {
     if (process.env.NODE_ENV === 'production') {
+      frogalytics.init({
+        apiUrl: '/frogalytics/api',
+        scriptUrl: '/frogalytics/frogalytics.js',
+      })
       splitbee.init({
         apiUrl: '/sb-api',
         scriptUrl: '/sb.js',
