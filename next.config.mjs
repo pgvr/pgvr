@@ -12,7 +12,7 @@ const rewrites = async () => [
     source: '/sb-api/:slug',
   },
   {
-    destination: 'https://frogalytics.com/:path*',
+    destination: 'https://www.frogalytics.com/:path*',
     source: '/frogalytics/:path*',
   },
 ]
