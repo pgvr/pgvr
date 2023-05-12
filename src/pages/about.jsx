@@ -90,20 +90,17 @@ export default function About() {
                 next company in the FAANG club will be.
               </p>
               <p>
-                Today, I’m an engineer at{' '}
+                Today, I’m the co-founder of{' '}
                 <a
                   className="font-bold"
-                  href="https://tanso.io"
+                  href="https://productlane.io"
                   target="_blank"
                   rel="noreferrer"
                 >
-                  @Tanso
+                  Productlane
                 </a>
-                , where we build software to automate processes in carbon
-                accounting and lay the analytical foundation for effective
-                emission reduction in producing companies. In my freetime I like
-                to play disc golf, build small-scale hydroponics systems, keep
-                up on the latest space news and work on side projects.
+                , where we build software to help companies do product
+                discovery.
               </p>
             </div>
           </div>

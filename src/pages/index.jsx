@@ -16,6 +16,7 @@ import logoYasoon from '@/images/logos/yasoon.jpeg'
 import logoSovanta from '@/images/logos/sovanta.jpeg'
 import logoApliconus from '@/images/logos/apliconus.png'
 import tansoLogo from '@/images/logos/tanso.png'
+import productlaneLogo from '@/images/logos/productlane.png'
 import image1 from '@/images/photos/image-1.jpg'
 import image2 from '@/images/photos/image-2.jpg'
 import image3 from '@/images/photos/image-3.jpg'
@@ -202,14 +203,21 @@ function Newsletter() {
 function Resume() {
   let resume = [
     {
-      company: 'Tanso',
-      title: 'Software Engineer',
-      logo: tansoLogo,
-      start: '2021',
+      company: 'Productlane',
+      title: 'Co-founder & CTO',
+      logo: productlaneLogo,
+      start: 'February 2023',
       end: {
         label: 'Present',
         dateTime: new Date().getFullYear(),
       },
+    },
+    {
+      company: 'Tanso',
+      title: 'Software Engineer',
+      logo: tansoLogo,
+      start: 'December 2021',
+      end: 'July 2023',
     },
     {
       company: 'SAP',
@@ -338,19 +346,17 @@ export default function Home({ articles }) {
           </h1>
           <p className="mt-6 text-base text-zinc-600 dark:text-zinc-400">
             My name is Patrick and I&apos;m a web developer with a masters
-            degree in Business Informatics from the University of Mannheim. Now
-            I work{' '}
+            degree in Business Informatics from the University of Mannheim.
+            Currently, I&apos;m the co-founder of{' '}
             <a
               className="font-bold"
-              href="https://tanso.io"
+              href="https://productlane.io"
               target="_blank"
               rel="noreferrer"
             >
-              @Tanso
+              Productlane
             </a>{' '}
-            where we automate processes in carbon accounting and lay the
-            analytical foundation for effective emission reduction in producing
-            companies.
+            where we build software to help companies do product discovery.
           </p>
           <div className="mt-6 flex gap-6">
             <SocialLink
