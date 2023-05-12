@@ -10,12 +10,7 @@ My most recent side project is [Hyzerbase](https://hyzerbase.com). Check it out 
 
 ## &#x1f4c8; GitHub Stats
 
-<a href="https://github-readme-stats.vercel.app/api?username=pgvr&count_private=true&show_icons=true">
-  <img align="center" src="https://github-readme-stats.vercel.app/api?username=pgvr&count_private=true&show_icons=true" />
-</a>
-<a href="https://github-readme-stats.vercel.app/api/top-langs/?username=pgvr">
-  <img align="center" src="https://github-readme-stats.vercel.app/api/top-langs/?username=pgvr&langs_count=3" />
-</a>
+[![GitHub Streak](https://streak-stats.demolab.com?user=pgvr)](https://git.io/streak-stats)
 
 ## &#x270d; Blog & Writing
 

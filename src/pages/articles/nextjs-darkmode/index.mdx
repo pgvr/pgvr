@@ -1,0 +1,162 @@
+import { ArticleLayout } from '@/components/ArticleLayout'
+import Image from 'next/future/image'
+
+export const meta = {
+  author: 'Patrick Göler von Ravensburg',
+  date: '2022-12-12',
+  title: 'Dark mode with Next.js and Tailwind',
+  description:
+    'Learn how to add dark mode to your Next.js app using Tailwind and next-themes',
+  slug: 'nextjs-darkmode',
+  thumbnail: 'darkmode-tailwind-banner.png',
+}
+
+export default (props) => <ArticleLayout meta={meta} {...props} />
+
+Adding dark mode to websites is increasingly common and thankfully this is quite easy to do nowadays. In this article I will explain how I usually go about adding dark mode when I can use Next.js and Tailwind. However, does not only work with Tailwind as the end result will just add the '.dark' or '.light' class to the html tag.
+
+I'll skip over the basics of setting up Next.js and Tailwind as there are a ton of resources on that.
+
+With tailwindcss you need to enable dark mode functionality in the config file.
+
+```js
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: ['./src/**/*.{js,jsx}'],
+  // enable dark mode based on classes
+  darkMode: 'class',
+  ...
+}
+```
+
+If you have the tailwindcss extension installed you will notice that you can now style elements with a `:dark` modifier.
+In theory you could now write some code which adds the `.dark` and `.light` classes to the `html` element, but you have to get a few things right to avoid the wrong theme flashing on load with Next.js, saving the selected theme and defaulting to the users preferred theme.
+So instead of writing this code ourselves we can use a wonderful package called `next-themes`.
+
+To get started with `next-themes`, simply install it using your package manager of choice.
+Then in `_app.tsx` you need to add a new provider, simply wrap any existing providers you might already have or just wrap the main component if this is the first global provider.
+
+```tsx
+return (
+  <ThemeProvider attribute="class" enableSystem>
+    <Component {...pageProps} />
+  </ThemeProvider>
+)
+```
+
+Note that we set the attribute to be `class` and `enableSystem` which defaults to the system setting for dark mode initially.
+
+All that is left to do is to use the hook exposed by `next-themes` to get/set the current theme.
+
+I'll add a theme selector implementation I did recently with tailwindcss, radix and next-themes to give you an idea on how to use it.
+
+## How to use the Radix Select as a dark mode selector
+
+```tsx
+import {
+  CheckIcon,
+  ChevronDownIcon,
+  ChevronUpIcon,
+  ComputerDesktopIcon,
+  MoonIcon,
+  SunIcon,
+} from '@heroicons/react/20/solid'
+import * as SelectPrimitive from '@radix-ui/react-select'
+import clsx from 'clsx'
+import { AnimatePresence, motion } from 'framer-motion'
+import { useTheme } from 'next-themes'
+import { ComponentProps, useEffect, useState } from 'react'
+import { IconButton } from './icon-button'
+
+const themes = [
+  { name: 'Light', value: 'light', icon: SunIcon },
+  { name: 'Dark', value: 'dark', icon: MoonIcon },
+  { name: 'System', value: 'system', icon: ComputerDesktopIcon },
+]
+
+export function ThemeSelector({ className }: { className?: string }) {
+  const { resolvedTheme, theme, setTheme } = useTheme()
+
+  // only use this component on the client, otherwise the selected theme will flash between values
+  // could also use next/dynamic with ssr: false
+  const [mounted, setMounted] = useState(false)
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+  if (!mounted) {
+    return null
+  }
+
+  return (
+    <AnimatePresence>
+      <SelectPrimitive.Root
+        value={theme}
+        onValueChange={(value) => {
+          setTheme(value)
+        }}
+      >
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+          <SelectPrimitive.Trigger asChild>
+            <IconButton>
+              <SelectPrimitive.Value className="text-gray-12" asChild>
+                {resolvedTheme === 'light' ? <MoonIcon /> : <SunIcon />}
+              </SelectPrimitive.Value>
+            </IconButton>
+          </SelectPrimitive.Trigger>
+        </motion.div>
+
+        <SelectPrimitive.Portal>
+          <SelectPrimitive.Content
+            asChild
+            className={clsx(
+              'border-gray-6 max-w-xs overflow-hidden rounded-lg border shadow-lg',
+              className
+            )}
+          >
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+            >
+              <SelectPrimitive.ScrollUpButton className="text-gray-10 flex items-center justify-center">
+                <ChevronUpIcon className="h-5 w-5" />
+              </SelectPrimitive.ScrollUpButton>
+
+              <SelectPrimitive.Viewport className="bg-gray-3 rounded-lg p-2 shadow-lg">
+                {themes.map((option) => (
+                  <SelectPrimitive.Item
+                    className="text-gray-11 data-[highlighted]:text-gray-12 data-[highlighted]:bg-gray-4 active:bg-gray-5 relative flex select-none items-center gap-2 rounded-md py-2 pr-8 pl-2 text-sm font-medium focus:outline-none"
+                    value={option.value}
+                    key={option.value}
+                  >
+                    <option.icon className="h-4 w-4" />
+                    <SelectPrimitive.ItemText>
+                      {option.name}
+                    </SelectPrimitive.ItemText>
+                    <SelectPrimitive.ItemIndicator className="absolute right-2 inline-flex items-center">
+                      <CheckIcon className="text-gray-12 h-5 w-5" />
+                    </SelectPrimitive.ItemIndicator>
+                  </SelectPrimitive.Item>
+                ))}
+              </SelectPrimitive.Viewport>
+
+              <SelectPrimitive.ScrollDownButton className="text-gray-10 flex items-center justify-center">
+                <ChevronDownIcon className="h-5 w-5" />
+              </SelectPrimitive.ScrollDownButton>
+            </motion.div>
+          </SelectPrimitive.Content>
+        </SelectPrimitive.Portal>
+      </SelectPrimitive.Root>
+    </AnimatePresence>
+  )
+}
+```
+
+The difference between `theme` and `resolvedTheme` is when `theme` is 'system' then `resolvedTheme` will be the actual value, so either 'dark' or 'light'.
+
+You might notice that this example does not use the default tailwindcss colors but rather the [Radix UI Colors](https://www.radix-ui.com/colors). I might go over on how to set that up in a separate blog post, but the nice thing is that you get 'automatic' dark mode, no need to style anything with the `:dark` modifier. For now I only have a [short twitter thread](https://twitter.com/patrick_gvr/status/1596884692648996864), feel free to check that out.
+
+Let me know what you think or whether this was helpful at all.
+
+Cheers ✌️
