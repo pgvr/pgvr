@@ -350,7 +350,7 @@ export default function Home({ articles }) {
             Currently, I&apos;m the co-founder of{' '}
             <a
               className="font-bold"
-              href="https://productlane.io"
+              href="https://productlane.com"
               target="_blank"
               rel="noreferrer"
             >

@@ -45,21 +45,17 @@ export default function Uses() {
       >
         <div className="space-y-20">
           <ToolsSection title="Workstation">
-            <Tool title="14” MacBook Pro, M1 Pro, 16GB RAM (2021)">
-              This thing is incredible and it&apos;s not even the highest spec
-              version. Anything with the M1 chip is almost a must have I feel
-              when it comes to software engineering. No fan noise, decent
-              thermals and crazy performance.
+            <Tool title="16” MacBook Pro, M2 Max 32GB">
+              It&apos;s a beast. I love it.
             </Tool>
-            <Tool title="Some kind of 27” 4K Dell">
-              That&apos;s just what we have at the office and it works quite
-              well.
+            <Tool title="Some kind of 34 inch ultra wide">
+              Having to windows next to each other with plenty of space is
+              really nice for anything, but especially for frontend development.
             </Tool>
             <Tool title="Apple Magic Keyboard">
-              I just love the default magic keyboard. I have the small version
-              without the numpad and the trackpad right next to it. I just
-              ordered a Nuphy Halo 65 though and maybe that will replace my dear
-              Magic Keyboard, let&apos;s see.
+              I keep coming back to this one. I tried a bunch of mechanical
+              keyboards, but there&apos;s something about the Magic Keyboard
+              that I really like.
             </Tool>
             <Tool title="Apple Magic Trackpad">
               Something about all the gestures makes me feel like a wizard with
@@ -70,12 +66,21 @@ export default function Uses() {
               If I&apos;m going to sit at my desk for most of the day, might as
               well make it comfortable right?
             </Tool>
+            <Tool title="Light bar">
+              An Amazon basics light bar for some nice indirect light.
+            </Tool>
+            <Tool title="Bose QC 35 II">
+              I can wear these all day and they don&apos;t hurt my ears. Great
+              noise cancelling and sound too.
+            </Tool>
           </ToolsSection>
           <ToolsSection title="Development tools">
-            <Tool title="VS Code">
+            <Tool title="VS Code / Neovim">
               I love VS Code and I recently started to use/learn Vim keybindings
               in VS Code. Vim nerds will probably roll their eyes but I think
-              it&apos;s a great way to get started.
+              it&apos;s a great way to get started. Now, I&apos;m trying to
+              fully get into Neovim after I had a bunch of issues with VS Code
+              and sluggish performance.
             </Tool>
             <Tool title="iTerm2">
               This was part of some setup guide I followed years ago and have

@@ -93,7 +93,7 @@ export default function About() {
                 Today, I’m the co-founder of{' '}
                 <a
                   className="font-bold"
-                  href="https://productlane.io"
+                  href="https://productlane.com"
                   target="_blank"
                   rel="noreferrer"
                 >
