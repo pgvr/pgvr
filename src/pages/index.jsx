@@ -356,7 +356,7 @@ export default function Home({ articles }) {
             >
               Productlane
             </a>{' '}
-            where we build software to help companies do product discovery.
+            where we build the new standard for product discovery.
           </p>
           <div className="mt-6 flex gap-6">
             <SocialLink
