@@ -123,6 +123,21 @@ export default function Uses() {
               detail, polish and great design are some of the many things that
               stand out when using it.
             </Tool>
+            <Tool title="Things">
+              My favourite todo app. I tried many and this one gets simplicity
+              and utility just right, at least for me.
+            </Tool>
+            <Tool title="Cron">
+              Not as happy with Cron as I would like to be, but them having a
+              mobile app is a big plus. Cross-calendar blocking is awesome and
+              it &quot;just works&quot;. Rise Calendar looks awesome, if they
+              had a mobile app I would give that a try.
+            </Tool>
+            <Tool title="Obsidian">
+              My note taking tool of choice. I like the idea of owning my own
+              data, no proprietary formats and being able to have custom
+              extensions.
+            </Tool>
           </ToolsSection>
         </div>
       </SimpleLayout>
