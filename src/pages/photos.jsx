@@ -10,7 +10,6 @@ import dog from '@/images/photography/dog.jpg'
 import eagle from '@/images/photography/eagle.jpg'
 import green from '@/images/photography/green.jpg'
 import guitar from '@/images/photography/guitar.jpg'
-import guy from '@/images/photography/guy.jpg'
 import ham from '@/images/photography/ham.jpg'
 import man from '@/images/photography/man.jpg'
 import path from '@/images/photography/path.jpg'
@@ -56,9 +55,6 @@ const photos = [
   },
   {
     image: guitar,
-  },
-  {
-    image: guy,
   },
   {
     image: ham,
