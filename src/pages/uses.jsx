@@ -80,7 +80,7 @@ export default function Uses() {
               in VS Code. Vim nerds will probably roll their eyes but I think
               it&apos;s a great way to get started. Now, I&apos;m trying to
               fully get into Neovim after I had a bunch of issues with VS Code
-              and sluggish performance.
+              and sluggish performance. Nvchad makes it really easy to get into.
             </Tool>
             <Tool title="iTerm2">
               This was part of some setup guide I followed years ago and have
