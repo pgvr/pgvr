@@ -98,17 +98,6 @@ export default function Uses() {
               for everything more complex TablePlus is very nice.
             </Tool>
           </ToolsSection>
-          <ToolsSection title="Design">
-            <Tool title="Figma">
-              Figma is great and I use it for everything from high- to low
-              fidelity, logos, brainstorming during meetings and much more.
-            </Tool>
-            <Tool title="Tailwind UI">
-              Tailwind UI is a paid component and template library for
-              Tailwindcss. I have bought this on the same day it initially it
-              released and it it&apos;s worth every cent.
-            </Tool>
-          </ToolsSection>
           <ToolsSection title="Productivity">
             <Tool title="Raycast">
               As a developer myself, it&apos;s a delight to see and use great
