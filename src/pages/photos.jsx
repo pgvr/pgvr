@@ -83,7 +83,7 @@ export default function Projects() {
   return (
     <>
       <NextSeo
-        title="Projects - Patrick Göler von Ravensburg"
+        title="Photos - Patrick Göler von Ravensburg"
         description="Photos"
         canonical="https://pgvr.dev/photos"
         openGraph={{
