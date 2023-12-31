@@ -375,7 +375,7 @@ export default function Home({ articles }) {
               icon={LinkedInIcon}
             />
             <SocialLink
-              href="mailto:mail@pgvr.dev"
+              href="mailto:hello@pgvr.dev"
               aria-label="Send me a message"
               icon={MailIcon}
             />
