@@ -9,7 +9,7 @@ export async function generateRssFeed() {
   let siteUrl = process.env.NEXT_PUBLIC_SITE_URL
   let author = {
     name: 'Patrick Göler von Ravensburg',
-    email: 'mail@pgvr.dev',
+    email: 'hello@pgvr.dev',
   }
 
   let feed = new Feed({
