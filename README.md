@@ -2,8 +2,6 @@
 
 My name is Patrick, I'm a Full Stack Web Developer from Germany. You can find me on [![Twitter][1.2]][1] or on [![LinkedIn][3.2]][3].
 
-Currently, I'm the co-founder of [Productlane](https://productlane.com) where we build the new standard for product discovery.
-
 ## &#128084; Projects
 
 My most recent side project is [Hyzerbase](https://hyzerbase.com). Check it out if you like Fantasy Disc Golf. 🥏
