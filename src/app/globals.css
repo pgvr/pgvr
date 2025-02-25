@@ -1,21 +1,85 @@
-@tailwind base;
+@import "tailwindcss/base";
+
+@import "@radix-ui/colors/slate";
+@import "@radix-ui/colors/slate-alpha";
+@import "@radix-ui/colors/slate-dark";
+@import "@radix-ui/colors/slate-dark-alpha";
+
+@import "@radix-ui/colors/iris";
+@import "@radix-ui/colors/iris-alpha";
+@import "@radix-ui/colors/iris-dark";
+@import "@radix-ui/colors/iris-dark-alpha";
+
 @tailwind components;
 @tailwind utilities;
 
-:root {
-	--background: #ffffff;
-	--foreground: #171717;
+@layer base {
+	*,
+	::before,
+	::after {
+	  @apply border-gray-6;
+	}
 }
 
-@media (prefers-color-scheme: dark) {
+
+:root {
+	--gray-1: var(--slate-1);
+	--gray-2: var(--slate-2);
+	--gray-3: var(--slate-3);
+	--gray-4: var(--slate-4);
+	--gray-5: var(--slate-5);
+	--gray-6: var(--slate-6);
+	--gray-7: var(--slate-7);
+	--gray-8: var(--slate-8);
+	--gray-9: var(--slate-9);
+	--gray-10: var(--slate-10);
+	--gray-11: var(--slate-11);
+	--gray-12: var(--slate-12);
+
+	--primary-1: var(--iris-1);
+	--primary-2: var(--iris-2);
+	--primary-3: var(--iris-3);
+	--primary-4: var(--iris-4);
+	--primary-5: var(--iris-5);
+	--primary-6: var(--iris-6);
+	--primary-7: var(--iris-7);
+	--primary-8: var(--iris-8);
+	--primary-9: var(--iris-9);
+	--primary-10: var(--iris-10);
+	--primary-11: var(--iris-11);
+	--primary-12: var(--iris-12);
+}
+
+.dark {
 	:root {
-		--background: #0a0a0a;
-		--foreground: #ededed;
+		--gray-1: var(--slate-dark-1);
+		--gray-2: var(--slate-dark-2);
+		--gray-3: var(--slate-dark-3);
+		--gray-4: var(--slate-dark-4);
+		--gray-5: var(--slate-dark-5);
+		--gray-6: var(--slate-dark-6);
+		--gray-7: var(--slate-dark-7);
+		--gray-8: var(--slate-dark-8);
+		--gray-9: var(--slate-dark-9);
+		--gray-10: var(--slate-dark-10);
+		--gray-11: var(--slate-dark-11);
+		--gray-12: var(--slate-dark-12);
+
+		--primary-1: var(--iris-dark-1);
+		--primary-2: var(--iris-dark-2);
+		--primary-3: var(--iris-dark-3);
+		--primary-4: var(--iris-dark-4);
+		--primary-5: var(--iris-dark-5);
+		--primary-6: var(--iris-dark-6);
+		--primary-7: var(--iris-dark-7);
+		--primary-8: var(--iris-dark-8);
+		--primary-9: var(--iris-dark-9);
+		--primary-10: var(--iris-dark-10);
+		--primary-11: var(--iris-dark-11);
+		--primary-12: var(--iris-dark-12);
 	}
 }
 
 body {
-	color: var(--foreground);
-	background: var(--background);
-	font-family: Arial, Helvetica, sans-serif;
+	@apply bg-gray-2 text-gray-12;
 }
